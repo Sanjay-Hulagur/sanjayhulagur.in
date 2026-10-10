@@ -1,0 +1,186 @@
+@import "tailwindcss";
+
+@theme {
+  --color-petrol: #123c3a;
+  --color-porcelain: #f3eee4;
+  --color-brass: #b69a68;
+  --color-ink: #1c2524;
+  --color-sage: #aab9ac;
+  --color-stone: #e6dfd1;
+  --color-muted: #716f66;
+  --color-quiet: #4e4c45;
+  --font-serif: var(--font-dm-serif), "Times New Roman", serif;
+  --font-sans: var(--font-dm-sans), "Helvetica Neue", sans-serif;
+}
+
+@layer base {
+  html {
+    background: var(--color-porcelain);
+    color: var(--color-ink);
+  }
+
+  body {
+    font-family: var(--font-sans);
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--color-petrol);
+    color: var(--color-porcelain);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 3px;
+  }
+}
+
+.home-screen {
+  display: flex;
+  min-height: 100svh;
+  flex-direction: column;
+  background: var(--color-porcelain);
+}
+
+.home-grid {
+  display: grid;
+  flex: 1;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--color-stone);
+  border-bottom: 1px solid var(--color-stone);
+  border-inline: 1px solid var(--color-stone);
+}
+
+.home-tile {
+  position: relative;
+  display: flex;
+  min-height: 9.25rem;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.75rem;
+  overflow: hidden;
+  padding: 0.85rem 1rem 0.8rem;
+  transition: background-color 200ms ease;
+}
+
+.home-tile-media {
+  position: absolute;
+  inset: 0;
+  transform: scale(1);
+  transition: transform 220ms ease;
+}
+
+.home-tile-arrow {
+  transition: transform 200ms ease;
+}
+
+.home-tile:hover .home-tile-arrow,
+.home-tile:focus-visible .home-tile-arrow {
+  transform: translateX(3px);
+}
+
+.home-tile:focus-visible {
+  outline-offset: -3px;
+}
+
+.home-tile:hover .home-tile-media,
+.home-tile:focus-visible .home-tile-media {
+  transform: scale(1.03);
+}
+
+.tone-editorial {
+  background: var(--color-porcelain);
+  color: var(--color-ink);
+}
+
+.tone-editorial:hover,
+.tone-editorial:focus-visible {
+  background: #efe8db;
+}
+
+.tone-stone {
+  background: var(--color-stone);
+  color: var(--color-ink);
+}
+
+.tone-stone:hover,
+.tone-stone:focus-visible {
+  background: #ddd4c3;
+}
+
+.tone-sage {
+  background: var(--color-sage);
+  color: var(--color-ink);
+}
+
+.tone-sage:hover,
+.tone-sage:focus-visible {
+  background: #9eaea0;
+}
+
+.tone-featured {
+  background: var(--color-petrol);
+  color: var(--color-porcelain);
+}
+
+.tone-featured:hover,
+.tone-featured:focus-visible {
+  background: #0e3331;
+}
+
+.tone-visual {
+  background: var(--color-petrol);
+  color: var(--color-porcelain);
+}
+
+@media (min-width: 768px) {
+  .home-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .home-tile {
+    min-height: 10.5rem;
+    padding: 1rem 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .home-screen {
+    height: 100svh;
+    overflow: hidden;
+  }
+
+  .home-grid {
+    min-height: 0;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: repeat(4, minmax(0, 1fr));
+  }
+
+  .home-tile {
+    min-height: 0;
+    padding: clamp(0.7rem, 1.5vh, 1.15rem) 2rem;
+  }
+}
+
+@media (min-width: 1024px) and (max-height: 820px) {
+  .tile-desc {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-tile,
+  .home-tile-media,
+  .home-tile-arrow {
+    transition: none;
+  }
+
+  .home-tile:hover .home-tile-media,
+  .home-tile:focus-visible .home-tile-media,
+  .home-tile:hover .home-tile-arrow,
+  .home-tile:focus-visible .home-tile-arrow {
+    transform: none;
+  }
+}
